@@ -1,0 +1,12 @@
+tmp
+build
+dist
+.idea
+.*project
+*.pyc
+*$py.class
+.DS_Store
+log.html
+report.html
+output.xml
+*.log
