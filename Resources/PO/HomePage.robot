@@ -14,6 +14,8 @@ ${leftCaret} =      //mat-icon[@data-mat-icon-name='w3ds-caret-left-m']
 ${rightCaret} =     //mat-icon[@data-mat-icon-name='w3ds-caret-right-m']
 ${saveBtn} =        id=btn-timesheet-save
 ${submitBtn} =      css=button#btn-timesheet-submit
+${totalHours_45} =   //div[@row-id='1']//app-toggle-totals-renderer[@class='ng-star-inserted' and contains(text(),'45')]
+${totalHours_0} =    //div[@row-id='2']//span[@class='ds-hide ng-star-inserted' and contains(text(),'0')]
 ${cpyPrevWeek} =    //a[@id='btn-copy-prev-week']
 ${prevWeekBox} =    css=div.cdk-overlay-pane
 ${zeroHrsMark} =    //span[text()='Zero hours']
@@ -47,26 +49,37 @@ Proceed To Current Week Claim
 
 Go To Next Week And Save Hours
     click element    ${rightCaret}
+    wait for condition    return document.readyState == "complete"    timeout=10s
+    Check If Next Week Entry Is Already Present
 
 Submit Labor Data For Current Week
-    click element    ${rightCaret}
-    click element    ${rightCaret}
-    # code to be moved after data checking is implemented for weekdays
+    page should contain element    ${submitBtn}
+    click element    ${submitBtn}
+    wait until page contains element    ${submittedIcon}    timeout=10s
+
+
+Check If Next Week Entry Is Already Present
+    ${hours_45_Displayed}    run keyword and return status    element should be visible    ${totalHours_45}
+    ${hours_0_Displayed}     run keyword and return status    page should contain element    ${totalHours_0}
+    run keyword if    ${hours_45_Displayed}==True       Submit Labor Data For Next Week
+    ...    ELSE IF     ${hours_0_Displayed}==True       Delete Time Entry And Proceed
+    ...    ELSE        Copy From Previous Week With Zero Hours
+
+
+Submit Labor Data For Next Week
+    page should contain element    ${submitBtn}
+    click element    ${submitBtn}
+    wait until page contains element    ${submittedIcon}    timeout=10s
+
+Delete Time Entry And Proceed
+
+
+Copy From Previous Week With Zero Hours
     wait until element is visible    ${cpyPrevWeek}    timeout=10s
-#    click element    ${submitBtn}
-#    wait until page contains element    ${submittedIcon}    timeout=10s
     click element    ${cpyPrevWeek}
     wait until element is visible    ${prevWeekBox}
     set focus to element    ${prevWeekBox}
     wait until element is visible    ${cpyLastWeekBtn}
-    click element    ${cpyLastWeekBtn}
-    wait until element is visible    ${saveBtn}
-    click element    ${saveBtn}
-
-Copy From Previous Week With Zero Hours
-    wait until element is visible    ${cpyPrevWeek}
-    click element    ${cpyPrevWeek}
-    wait until element is visible    ${prevWeekBox}
     click element    ${cpyLastWeekBtn}
     wait until element is visible    ${saveBtn}
     click element    ${saveBtn}
