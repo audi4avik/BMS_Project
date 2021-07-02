@@ -16,10 +16,12 @@ ${saveBtn} =        id=btn-timesheet-save
 ${submitBtn} =      css=button#btn-timesheet-submit
 ${totalHours_45} =   //div[@row-id='1']//app-toggle-totals-renderer[@class='ng-star-inserted' and contains(text(),'45')]
 ${totalHours_0} =    //div[@row-id='2']//span[@class='ds-hide ng-star-inserted' and contains(text(),'0')]
+${actionIcon} =     //div[@row-index='0']//mat-icon[@data-mat-icon-name='w3ds-more-filled-vertical-m']
+${removeClaim} =    id=btn-claim-item-remove
 ${cpyPrevWeek} =    //a[@id='btn-copy-prev-week']
 ${prevWeekBox} =    css=div.cdk-overlay-pane
 ${zeroHrsMark} =    //span[text()='Zero hours']
-${cpyLastWeekBtn} =    //div[@id='cdk-overlay-9']//button[text()='Ok']
+${cpyLastWeekBtn} =   //button[text()='Ok']
 
 
 *** Keywords ***
@@ -72,7 +74,10 @@ Submit Labor Data For Next Week
     wait until page contains element    ${submittedIcon}    timeout=10s
 
 Delete Time Entry And Proceed
-
+    click element    ${actionIcon}
+    wait until element is visible    ${removeClaim}
+    click element    ${removeClaim}
+    Copy From Previous Week With Zero Hours
 
 Copy From Previous Week With Zero Hours
     wait until element is visible    ${cpyPrevWeek}    timeout=10s
