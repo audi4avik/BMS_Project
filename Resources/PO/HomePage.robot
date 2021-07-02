@@ -73,6 +73,7 @@ Submit Labor Data For Next Week
     click element    ${submitBtn}
     wait until page contains element    ${submittedIcon}    timeout=10s
 
+# remove the code after week ending 9th
 Delete Time Entry And Proceed
     click element    ${actionIcon}
     wait until element is visible    ${removeClaim}
@@ -88,3 +89,4 @@ Copy From Previous Week With Zero Hours
     click element    ${cpyLastWeekBtn}
     wait until element is visible    ${saveBtn}
     click element    ${saveBtn}
+    page should contain element    ${totalHours_0}
