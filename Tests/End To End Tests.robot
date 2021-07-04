@@ -10,6 +10,6 @@ Test Teardown   Common.Begin Teardown
 *** Test Cases ***
 Enter BMS Data From Previous Week With Zero Hours
     [Tags]    previous
-    [Documentation]    Test case for copying from previous week functionality
+    [Documentation]    Test case for copying from previous week functionality with zero and actual hours
     BMSKeywords.Copy The Timesheet From Last Week And Submit Claim      @{loginCreds}
 

@@ -17,4 +17,4 @@ Go To Labor Claim Landing Page And Perform Login
 
 Copy And Submit Labor From Last Week
     HomePage.Verify Home Page Loaded
-    HomePage.Proceed To Current Week Claim
+    HomePage.Proceed To Claim Labor
