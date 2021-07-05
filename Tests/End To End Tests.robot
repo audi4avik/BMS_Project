@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   This is the test suite for claiming time@ibm
+Documentation   This is the test suite for automating time@ibm
 Resource    ../Resources/BMSKeywords.robot
 Resource    ../Resources/Common.robot
 Resource    ../Input/InputData.robot
@@ -13,3 +13,8 @@ Enter BMS Data From Previous Week With Zero Hours
     [Documentation]    Test case for copying from previous week functionality with zero and actual hours
     BMSKeywords.Copy The Timesheet From Last Week And Submit Claim      @{loginCreds}
 
+# robot -d results -i relnotes tests\end*robot
+Validate Release note Details of Time@IBM And Store
+    [Tags]    relnotes
+    [Documentation]    This test case is to test version and release notes of time@ibm
+    BMSKeywords.Extract The Release Notes And Write Into Word Doc   ${filepath}    @{loginCreds}
