@@ -6,4 +6,4 @@ ${browser} =    chrome
 ${baseUrl} =    https://time.ibm.com/
 @{loginCreds} =   avdatta2@in.ibm.com   FerrariMonzaSP2@$
 
-${filepath} =    /Output
+${filepath} =    ./Output//AboutTime.docx
