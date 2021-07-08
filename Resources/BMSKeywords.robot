@@ -32,4 +32,5 @@ Go To Footer Section And Perform The Validation
     [Arguments]    ${filepath}
     HomePage.Verify Home Page Loaded
     FooterSection.Locate The Elements And Validate
-    FooterSection.Write Extracted Data Into Word File    ${filepath}
+    FooterSection.Check If Write File Already Exists    ${filepath}
+    FooterSection.Write Data Into File    ${filepath}
