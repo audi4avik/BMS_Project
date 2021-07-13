@@ -22,6 +22,7 @@ ${cpyPrevWeek} =    //a[@id='btn-copy-prev-week']
 ${prevWeekBox} =    css=div.cdk-overlay-pane
 ${zeroHrsMark} =    //span[@class='ds-mar-l-0_5' or text()='Zero hours']
 ${cpyLastWeekBtn} =   //button[text()='Ok']
+${verifyHours} =    //div[@row-id='0']//app-toggle-totals-renderer[contains(text(),'45')]
 
 
 *** Keywords ***
@@ -92,7 +93,7 @@ Copy From Previous Week With Zero Hours
     wait until element is visible    ${saveBtn}
     click element    ${saveBtn}
     wait for condition    return document.readyState == "complete"    timeout=10s
-    page should contain element    ${saveIcon}
+    wait until element is visible    ${saveIcon}    timeout=10s
 
 
 Copy From Previous Week With Complete Hours
@@ -103,7 +104,7 @@ Copy From Previous Week With Complete Hours
     wait until element is visible    ${zeroHrsMark}
     click element    ${zeroHrsMark}
     click element    ${cpyLastWeekBtn}
-    wait until element is visible    ${saveBtn}
-    click element    ${saveBtn}
-    wait for condition    return document.readyState == "complete"    timeout=10s
-    page should contain element    ${saveIcon}
+    wait until element is visible    ${verifyHours}    timeout=10s
+    scroll element into view    ${submitBtn}
+    click element    ${submitBtn}
+    wait until element is visible    ${submittedIcon}    timeout=10s
