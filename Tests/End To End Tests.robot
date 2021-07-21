@@ -19,3 +19,8 @@ Validate Release note Details of Time@IBM And Store
     [Tags]    relnotes
     [Documentation]    This test case is to test version and release notes of time@ibm
     BMSKeywords.Extract The Release Notes And Write Into Word Doc   ${filepath}    @{loginCreds}
+
+Validate The Error When Editing Data Of Locked Period
+    [Tags]    Lock
+    [Documentation]    Prior week locked labor should not be editable
+    BMSKeywords.Locked Period Labor Edit Not Permitted    @{loginCreds}

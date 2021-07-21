@@ -23,6 +23,8 @@ ${prevWeekBox} =    css=div.cdk-overlay-pane
 ${zeroHrsMark} =    //span[@class='ds-mar-l-0_5' or text()='Zero hours']
 ${cpyLastWeekBtn} =   //button[text()='Ok']
 ${verifyHours} =    //div[@row-id='0']//app-toggle-totals-renderer[contains(text(),'45')]
+#Locked Hours
+${lockIcon} =       //mat-icon[@data-mat-icon-name='w3ds-locked']
 
 
 *** Keywords ***
@@ -108,3 +110,16 @@ Copy From Previous Week With Complete Hours
     scroll element into view    ${submitBtn}
     click element    ${submitBtn}
     wait until element is visible    ${submittedIcon}    timeout=10s
+
+Find A Past Week Which Is Locked
+    ${lockFlag}    run keyword and return status    element should be visible    ${lockIcon}
+    IF    ${lockFlag}==True
+    log    This week labor is locked.
+    ELSE
+        FOR    ${i}    IN RANGE    1    6
+            click element    ${leftCaret}
+            exit for loop if    ${lockFlag}==True
+        END
+    END
+
+Editing The Week Should Display Error

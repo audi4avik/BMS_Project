@@ -12,9 +12,14 @@ Copy The Timesheet From Last Week And Submit Claim
     Copy And Submit Labor From Last Week
 
 Extract The Release Notes And Write Into Word Doc
-     [Arguments]  ${filepath}    @{loginCreds}
-     Go To Labor Claim Landing Page And Perform Login    @{loginCreds}
-     Go To Footer Section And Perform The Validation    ${filepath}
+    [Arguments]  ${filepath}    @{loginCreds}
+    Go To Labor Claim Landing Page And Perform Login    @{loginCreds}
+    Go To Footer Section And Perform The Validation    ${filepath}
+
+Locked Period Labor Edit Not Permitted
+    [Arguments]    @{loginCreds}
+    Go To Labor Claim Landing Page And Perform Login    @{loginCreds}
+    Go To Previous Locked Week And Try Editing
 
 
 #Low level keywords
@@ -26,6 +31,10 @@ Go To Labor Claim Landing Page And Perform Login
 Copy And Submit Labor From Last Week
     HomePage.Verify Home Page Loaded
     HomePage.Proceed To Claim Labor
+
+Go To Previous Locked Week And Try Editing
+    HomePage.Find A Past Week Which Is Locked
+    HomePage.Editing The Week Should Display Error
 
 
 Go To Footer Section And Perform The Validation
