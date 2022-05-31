@@ -9,9 +9,10 @@ Test Teardown   Common.Begin Teardown
 
 # TODO  Add a custom python library
 *** Test Cases ***
-Enter BMS Data From Previous Week With Zero Hours
-    [Tags]    previous
-    [Documentation]    Test case for copying from previous week functionality with zero and actual hours
+# robot -d results -i ilc tests\end*robot
+Enter BMS Data From Previous Week And Submit Timesheet
+    [Tags]    ilc
+    [Documentation]    Test case for submitting weekly hours
     BMSKeywords.Copy The Timesheet From Last Week And Submit Claim      @{loginCreds}
 
 # robot -d results -i relnotes tests\end*robot
